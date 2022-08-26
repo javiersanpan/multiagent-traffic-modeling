@@ -1,12 +1,12 @@
 # Multiagent Traffic Modeling
-Javier Sánchez Panduro @javiersanpan
 
-María Carelia Ibarra Vasquez @kreiji
+## Authors
+- Javier Sánchez Panduro [@javiersanpan](https://github.com/javiersanpan)
+- María Carelia Ibarra Vasquez [@kreiji](https://github.com/kreiji)
+- Lizeth García [@lizgr01](https://github.com/lizgr01)
+- Emilio Vazquez
 
-Lizeth García
-
-Emilio Vazquez
-
+## About
 
 This project has been modeled using the agentpy library. It uses a grid environment and has three types of agents: cars, roads and stoplights. As of now, it works using two agents and two roads, but this behaviour can be modified.
 
