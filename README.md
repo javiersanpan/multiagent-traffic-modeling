@@ -7,6 +7,7 @@ Lizeth García
 
 Emilio Vazquez
 
+
 This project has been modeled using the agentpy library. It uses a grid environment and has three types of agents: cars, roads and stoplights. As of now, it works using two agents and two roads, but this behaviour can be modified.
 
 Features
