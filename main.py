@@ -3,8 +3,13 @@ import agentpy as ap
 # Custom made classes and functions
 from TrafficModeling.multiAgentTraffic import MultiAgentTraffic
 from TrafficModeling.roundabout import Roundabout
+from TrafficModeling.road import Road
 
 # Road agent positions
+roadObj = Road(3, 13, 13, [26,13], [13,26])
+POS = roadObj.drawRoad()
+print(POS)
+print("AAAAAAAAAAA")
 
 POSITIONS_X = []
 POSITIONS_Y = []
@@ -12,13 +17,15 @@ POSITIONS_BG = []
 
 rab = Roundabout(3, 13, 13)
 
-for i in range(0, 11):
-    POSITIONS_X.append((13,i))
-    POSITIONS_Y.append((i,13))
+#POSITIONS_X = roadObj.drawRoad()
+
+#for i in range(0, 11):
+#    POSITIONS_X.append((13,i))
+#    POSITIONS_Y.append((i,13))
     
-for i in range(16, 27):
-    POSITIONS_X.append((13,i))
-    POSITIONS_Y.append((i,13))
+#for i in range(16, 27):
+#    POSITIONS_X.append((13,i))
+#    POSITIONS_Y.append((i,13))
 
 #POSITIONS_X = POSITIONS_X + rab.drawTL() + rab.drawTR()
 #POSITIONS_X.append((10,13))
@@ -26,8 +33,16 @@ for i in range(16, 27):
 #POSITIONS_Y = POSITIONS_Y + rab.drawBR() + rab.drawTR()
 #POSITIONS_Y.append((13,16))
 
-POSITIONS_BG = rab.drawBL() + rab.drawBR()
+#POSITIONS_BG = rab.drawBL() + rab.drawBR()
 
+print(POSITIONS_X)
+print(type(POSITIONS_X))
+print(type(POS))
+print("BBBBBBB")
+
+POSITIONS_X = POS
+
+#print(POSITIONS_X)
 
 # Define parameters
 parameters = { 
