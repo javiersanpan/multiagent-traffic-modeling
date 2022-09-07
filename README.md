@@ -15,7 +15,11 @@ Features
 * Roads can be marked as travelled and untravelled
 * Stoplights control de behaviour of specific car agent
 
-## Requirements
+### Animation of successful model:
+
+![animation-output](./output/classesanimation.gif)
+
+## Requirements
 
 Both Conda and PIP are used to install requirements. 
 
