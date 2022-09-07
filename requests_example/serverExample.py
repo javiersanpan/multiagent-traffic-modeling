@@ -11,7 +11,7 @@ json = FlaskJSON(app)
 def agentpy_senddata():
     data = request.get_json(force=True)
     print(data)
-    return "<p>hello world!</p>"
+    return "Posted"
 
 # app es el servidor, pero se necesita correr para que esté escuchando
 
