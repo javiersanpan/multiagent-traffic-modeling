@@ -2,8 +2,8 @@
 
 ## Authors
 - Javier Sánchez Panduro [@javiersanpan](https://github.com/javiersanpan)
-- María Carelia Ibarra Vasquez [@kreiji](https://github.com/kreiji)
 - Lizeth García [@lizgr01](https://github.com/lizgr01)
+- María Carelia Ibarra Vasquez [@kreiji](https://github.com/kreiji)
 - Emilio Vazquez [@BronzyChief](https://github.com/BronzyChief)
 
 ## About
