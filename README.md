@@ -14,3 +14,14 @@ Features
 * Multiple car agent traverse road agents marked as untravelled
 * Roads can be marked as travelled and untravelled
 * Stoplights control de behaviour of specific car agent
+
+## Requirements
+
+Both Conda and PIP are used to install requirements. 
+
+Run the following to install requirements
+```
+conda install --file requirementsCONDA.txt
+
+pip install -r requirementsPIP.txt
+```
