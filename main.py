@@ -8,7 +8,7 @@ from TrafficModeling.road import Road
 size = 27
 
 # Road agent positions
-ratio = 2
+ratio = 3
 vertical_center = 13
 horizontal_center = 13
 
@@ -34,7 +34,6 @@ parameters = {
     'cars_amount':cars_amount,
     'begin_points':begin_points
 }
-
 # Create single-run animation with custom colors
 def animation_plot(model, ax):
     attr_grid = model.city.attr_grid('type_agent')
@@ -48,3 +47,5 @@ model = MultiAgentTraffic(parameters)
 
 animation = ap.animate(model, fig, ax, animation_plot)
 animation.save("./output/modelanimation.gif")
+
+print("Model and animation generated successfully")
