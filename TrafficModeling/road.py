@@ -2,7 +2,6 @@ from TrafficModeling.roundabout import Roundabout
 
 class Road:
     def __init__(self, ratio, x_center, y_center, begin_p, end_p):
-        # x-5 de un lado y x+5 del otro lado
         # llamar a la clase roundabout y mandarle el radio para que dibuje la calle
         #self.car = car
         self.ratio = ratio
@@ -10,7 +9,7 @@ class Road:
         self.y_center = y_center
         self.begin_p = begin_p
         self.end_p = end_p
-        self.rab = Roundabout(5, 13, 13)
+        self.rab = Roundabout(ratio, x_center, y_center)
   
     def drawbottom(self):
         POSITIONS_DB = []
@@ -48,15 +47,7 @@ class Road:
         return POSITIONS_BG
 
     def drawRoad(self):
-        # POSSIBLE_TARGETS = [(26,13), (13,26),  (0,13), (13,0)]
         POSITIONS = []
-
-        #primera salida: 13, 26
-        #2nda salida: 0,13
-        #3era salida: 13,0
-
-         #falta acceder a las partes de la rotonda
-        #checar por donde viene y qué dibuja depende del bp y ep
 
         #SI SALE DE ABAJO
         if self.begin_p[0] == 26 and self.begin_p[1] == 13:

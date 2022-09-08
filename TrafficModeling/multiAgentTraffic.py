@@ -5,7 +5,15 @@ from TrafficModeling.road import Road
 
 class MultiAgentTraffic(ap.Model):
     def setup(self):
+        #self.cars = ap.AgentList(self,2)
+        #self.roadBG = ap.AgentList(self,len(road.drawBG()))
 
+        # Read custom parameters
+        self.roads_positions = self.p.roads_positions
+        self.road_background = self.p.road_background
+        self.cars_amount = self.p.cars_amount
+
+        #QUITAR
         self.POSITIONS_X = self.p.POSITIONS_X
         self.POSITIONS_Y = self.p.POSITIONS_Y
         self.POSITIONS_BG = self.p.POSITIONS_BG
