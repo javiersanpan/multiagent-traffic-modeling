@@ -15,7 +15,6 @@ begin_points = [(26,13), (13,26)]
 end_points = [(0,13), (26,13)]
 
 roads_positions = []
-road_background = []
 
 # Generate road coordinates for each car and background road coordinates
 for i in range(cars_amount):
@@ -23,24 +22,15 @@ for i in range(cars_amount):
     roads_positions.append(road.drawRoad())
 road_background = road.drawBG()
 
-POSITIONS_X = []
-POSITIONS_Y = roads_positions[1]
-POSITIONS_BG = []
-
-
 # Define parameters
 parameters = { 
     'size':27, 
     'steps':50,
-    'POSITIONS_X':POSITIONS_X,
-    'POSITIONS_Y':POSITIONS_Y,
-    'POSITIONS_BG':POSITIONS_BG,
     'roads_positions':roads_positions,
     'road_background':road_background,
     'cars_amount':cars_amount
     
 }
-
 
 # Create single-run animation with custom colors
 def animation_plot(model, ax):

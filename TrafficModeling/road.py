@@ -32,7 +32,7 @@ class Road:
     def drawleft(self):
         POSITIONS_DL = []
         for i in range(0,11):
-            POSITIONS_DL.append((i,13))
+            POSITIONS_DL.append((13,i))
         return POSITIONS_DL
 
 #POSITIONS
