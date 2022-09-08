@@ -1,132 +1,131 @@
 from TrafficModeling.roundabout import Roundabout
 
 class Road:
-    def __init__(self, ratio, x_center, y_center, begin_p, end_p):
-        # llamar a la clase roundabout y mandarle el radio para que dibuje la calle
-        #self.car = car
+    def __init__(self, ratio, vertical_center, horizontal_center, begin_p, end_p, size):
         self.ratio = ratio
-        self.x_center = x_center
-        self.y_center = y_center
+        self.vertical_center = vertical_center
+        self.horizontal_center = horizontal_center
         self.begin_p = begin_p
         self.end_p = end_p
-        self.rab = Roundabout(ratio, x_center, y_center)
-  
-    def drawbottom(self):
+        self.rab = Roundabout(ratio, vertical_center, horizontal_center)
+        self.size = size
+        
+    def draw_south(self):
         POSITIONS_DB = []
-        for i in range(16,27):
-            POSITIONS_DB.append((i,13))
+        for i in range(self.vertical_center + self.ratio , self.size):
+            POSITIONS_DB.append((i, self.horizontal_center))
         return POSITIONS_DB
 
-    def drawtop(self):
+    def draw_north(self):
         POSITIONS_DT = []
-        for i in range(0,11):
-            POSITIONS_DT.append((i,13))
+        for i in range(0, self.vertical_center - self.ratio):
+            POSITIONS_DT.append((i, self.horizontal_center))
         return POSITIONS_DT
 
-    def drawright(self):
+    def draw_east(self):
         POSITIONS_DR = []
-        for i in range(16,27):
-            POSITIONS_DR.append((13,i))
+        for i in range(self.vertical_center + self.ratio , self.size):
+            POSITIONS_DR.append((self.horizontal_center ,i))
         return POSITIONS_DR
 
-    def drawleft(self):
+    def draw_west(self):
         POSITIONS_DL = []
-        for i in range(0,11):
-            POSITIONS_DL.append((13,i))
+        for i in range(0, self.vertical_center - self.ratio):
+            POSITIONS_DL.append((self.horizontal_center ,i))
         return POSITIONS_DL
 
 #POSITIONS
     def drawBG(self):
         POSITIONS_BG = []
-        #dibujar posiciones del background
-        POSITIONS_BG += self.drawbottom()
-        POSITIONS_BG += self.drawleft()
-        POSITIONS_BG += self.drawright()
-        POSITIONS_BG += self.drawtop()
+        # Draw background road
+        POSITIONS_BG += self.draw_south()
+        POSITIONS_BG += self.draw_west()
+        POSITIONS_BG += self.draw_east()
+        POSITIONS_BG += self.draw_north()
         POSITIONS_BG += self.rab.drawBL() + self.rab.drawBR() + self.rab.drawTL() + self.rab.drawTR()
         return POSITIONS_BG
 
     def drawRoad(self):
         POSITIONS = []
 
-        #SI SALE DE ABAJO
+        # If exit is south
         if self.begin_p[0] == 26 and self.begin_p[1] == 13:
-            POSITIONS+=self.drawbottom()
+            POSITIONS+=self.draw_south()
             POSITIONS+=self.rab.drawBR()
-            POSITIONS.append((13,16))
+            #POSITIONS.append((13,16))
 
             if self.end_p[0] == 13 and self.end_p[1] == 26:
-                POSITIONS+=self.drawright()
+                POSITIONS+=self.draw_east()
 
             elif self.end_p[0] == 0 and self.end_p[1] == 13:
-                POSITIONS+=self.drawtop()
+                POSITIONS+=self.draw_north()
                 POSITIONS += self.rab.drawTR()
-                POSITIONS.append((10,13))
+                #POSITIONS.append((10,13))
             
             elif self.end_p[0] == 13 and self.end_p[1] == 0:
-                POSITIONS+=self.drawleft()
+                POSITIONS+=self.draw_west()
                 POSITIONS += self.rab.drawTR() + self.rab.drawTL()
-                POSITIONS.append((10,13))
-                POSITIONS.append((13,10))
+                #POSITIONS.append((10,13))
+                #POSITIONS.append((13,10))
             
-        #SI SALE DE LA DERECHA
+        # If exit is east
         elif self.begin_p[0] == 13 and self.begin_p[1] == 26:
-            POSITIONS+=self.drawright()
+            POSITIONS+=self.draw_east()
             POSITIONS+=self.rab.drawTR()
-            POSITIONS.append((10,13))
+            #POSITIONS.append((10,13))
 
             if self.end_p[0] == 0 and self.end_p[1] == 13:
-                POSITIONS+=self.drawtop()
+                POSITIONS+=self.draw_north()
 
             elif self.end_p[0] == 13 and self.end_p[1] == 0:
-                POSITIONS+=self.drawleft()
+                POSITIONS+=self.draw_west()
                 POSITIONS+=self.rab.drawTL()
-                POSITIONS.append((13,10))
+                #POSITIONS.append((13,10))
 
             elif self.end_p[0] == 26 and self.end_p[1] == 13:
-                POSITIONS+=self.drawbottom()
+                POSITIONS+=self.draw_south()
                 POSITIONS+=self.rab.drawTL() + self.rab.drawBL()
-                POSITIONS.append((13,10))
-                POSITIONS.append((16,13))
+                #POSITIONS.append((13,10))
+                #POSITIONS.append((16,13))
 
-        #SI SALE DE ARRIBA
+        # If exit is north
         elif self.begin_p[0] == 0 and self.begin_p[1] == 13:
-            POSITIONS+=self.drawtop()
+            POSITIONS+=self.draw_north()
             POSITIONS+=self.rab.drawTL()
-            POSITIONS.append((13,10))
+            #POSITIONS.append((13,10))
 
             if self.end_p[0] == 13 and self.end_p[1] == 0:
-                POSITIONS+=self.drawleft()
+                POSITIONS+=self.draw_west()
             
             elif self.end_p[0] == 26 and self.end_p[1] == 13:
-                POSITIONS+=self.drawbottom()
+                POSITIONS+=self.draw_south()
                 POSITIONS+=self.rab.drawBL()
-                POSITIONS.append((16,13))
+                #POSITIONS.append((16,13))
 
             elif self.end_p[0] == 13 and self.end_p[1] == 26:
-                POSITIONS+=self.drawright()
+                POSITIONS+=self.draw_east()
                 POSITIONS+=self.rab.drawBL() + self.rab.drawBR()
-                POSITIONS.append((16,13))
-                POSITIONS.append((13,16))
+                #POSITIONS.append((16,13))
+                #POSITIONS.append((13,16))
         
-        #SI SALE DE IZQ
+        # If exit is west
         elif self.begin_p[0] == 13 and self.begin_p[1] == 0:
-            POSITIONS+=self.drawleft()
+            POSITIONS+=self.draw_west()
             POSITIONS+=self.rab.drawBL()
-            POSITIONS.append((16,13))
+            #POSITIONS.append((16,13))
 
             if self.end_p[0] == 26 and self.end_p[1] == 13:
-                POSITIONS+=self.drawbottom()
+                POSITIONS+=self.draw_south()
 
             elif self.end_p[0] == 13 and self.end_p[1] == 26:
-                POSITIONS+=self.drawright()
+                POSITIONS+=self.draw_east()
                 POSITIONS+=self.rab.drawBR()
-                POSITIONS.append((13,16))
+                #POSITIONS.append((13,16))
 
             elif self.end_p[0] == 0 and self.end_p[1] == 13:
-                POSITIONS+=self.drawtop()
+                POSITIONS+=self.draw_north()
                 POSITIONS+=self.rab.drawBR()+self.rab.drawTR()
-                POSITIONS.append((13,16))
-                POSITIONS.append((0,13))
+                #POSITIONS.append((13,16))
+                #POSITIONS.append((0,13))
     
         return POSITIONS
