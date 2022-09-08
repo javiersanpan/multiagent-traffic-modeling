@@ -1,5 +1,7 @@
 import agentpy as ap
 
+#LO QUE NECESITAMOS ES PONERLE OTRO ATRIBUTO A LOS CARROS PORQUE SÓLO ESTÁ IDENTIFICANDO QUE HAY ROAD
+
 class MultiAgentTraffic(ap.Model):
     def setup(self):
         # Read custom parameters
@@ -34,6 +36,11 @@ class MultiAgentTraffic(ap.Model):
         #2: car 0
         #3: car 1
         #4: car 2
+
+        #identificar si es carro o road!!
+        
+        road_agents.travel = 0
+
         road_agents[0].type_agent = 0
         road_agents[1].type_agent = 0
         ####road_agents[2].type_agent = 0
@@ -55,12 +62,19 @@ class MultiAgentTraffic(ap.Model):
         cars = self.cars
         
         for car in cars:
+            print("----------------")
+            print("car position: ")
+            print(self.city.positions[car])
+            print("neighbors positions: ")
             for neighbor in self.city.neighbors(car):
                 new_position = self.city.positions[neighbor]
+                print(new_position)
+                print("type agent")
+                print(neighbor.identify)
 
-                if neighbor.type_agent == 0 and neighbor.road_direction == 0 and car.type_agent == 2:
+                if neighbor.travel == 0 and neighbor.road_direction == 0 and car.type_agent == 2:
                     self.city.move_to(car, new_position)
-                    neighbor.type_agent = 1
+                    neighbor.travel = 1
                     break
                 '''
                 elif 2 <= neighbor.type_agent and neighbor.type_agent<=3 and car.type_agent == 2:
@@ -82,12 +96,12 @@ class MultiAgentTraffic(ap.Model):
                         print("AAAAAAAAAA")
                         continue 
                 ''' 
-                if car.type_agent == 3 and neighbor.type_agent == 2:
+                if car.type_agent == 3 and neighbor.identify == 1:
                     print("YES!!!!!")
                     break
-                if neighbor.type_agent == 0 and neighbor.road_direction == 1 and car.type_agent == 3:
+                if neighbor.travel == 0 and neighbor.road_direction == 1 and car.type_agent == 3:
                     self.city.move_to(car, new_position)
-                    neighbor.type_agent = 1
+                    neighbor.travel = 1
                     break
                 '''
                 elif 2 <= neighbor.type_agent and neighbor.type_agent<=3 and car.type_agent == 3:
