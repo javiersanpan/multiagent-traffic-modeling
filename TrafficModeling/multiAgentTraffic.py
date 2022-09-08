@@ -1,7 +1,4 @@
 import agentpy as ap
-# Custom made classes and functions
-from TrafficModeling.roundabout import Roundabout
-from TrafficModeling.road import Road
 
 class MultiAgentTraffic(ap.Model):
     def setup(self):
@@ -16,9 +13,8 @@ class MultiAgentTraffic(ap.Model):
 
         # Create car agents
         self.cars=ap.AgentList(self,self.cars_amount)
-
         # Add car agents
-        self.city.add_agents(self.cars, [self.begin_points[0],self.begin_points[1]])
+        self.city.add_agents(self.cars, [self.begin_points[0], self.begin_points[1], self.begin_points[2]])
 
         # Create and add road agents
         road_agents = []
@@ -35,6 +31,7 @@ class MultiAgentTraffic(ap.Model):
         #1: travelled road
         #2: car 0
         #3: car 1
+        #4: car 2
         road_agents[0].type_agent = 0
         road_agents[1].type_agent = 0
         road_agents[2].type_agent = 0
@@ -45,8 +42,7 @@ class MultiAgentTraffic(ap.Model):
         self.cars[2].type_agent = 4
 
         # Road direction attribute
-        #0: is vertical
-        #1: is horizontal
+        # Each element is a road for a different car agent
         road_agents[0].road_direction = 0
         road_agents[1].road_direction = 1
         road_agents[2].road_direction = 2

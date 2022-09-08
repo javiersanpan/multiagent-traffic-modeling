@@ -2,7 +2,6 @@ import matplotlib.pyplot as plt
 import agentpy as ap
 # Custom made classes and functions
 from TrafficModeling.multiAgentTraffic import MultiAgentTraffic
-from TrafficModeling.roundabout import Roundabout
 from TrafficModeling.road import Road
 
 # Road agent positions
@@ -26,20 +25,19 @@ road_background = road.drawBG()
 parameters = { 
     'size':27, 
     'steps':50,
+
     'roads_positions':roads_positions,
     'road_background':road_background,
     'cars_amount':cars_amount,
     'begin_points':begin_points
-    
 }
 
 # Create single-run animation with custom colors
 def animation_plot(model, ax):
-    attr_grid=model.city.attr_grid('type_agent')
+    attr_grid = model.city.attr_grid('type_agent')
     color_dict = {0:'#808080', 1:'#ADFFBF', 2: '#FF00FF',3:'#0000FF', 4:'00FF00', None: '#497a41'}
-    ap.gridplot (attr_grid, ax=ax, color_dict=color_dict, convert=True)
-    ax.set_title(f"Traffic simulation\n"
-    f"Time-step: {model.t}")
+    ap.gridplot(attr_grid, ax=ax, color_dict=color_dict, convert=True)
+    ax.set_title(f"Traffic simulation\n"f"Time-step: {model.t}")
 
 fig, ax = plt. subplots()
 
