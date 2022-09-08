@@ -35,6 +35,16 @@ class Road:
             POSITIONS_DL.append((13,i))
         return POSITIONS_DL
 
+    def drawRoad2(self):
+        POSITIONS = []
+        if self.begin_p[0] == 13 and self.begin_p[1] == 26:
+            for i in range(0,26):
+                POSITIONS.append((13,i))
+        if self.begin_p[0] == 26 and self.begin_p[1] == 13:
+            for i in range(0,26):
+                POSITIONS.append((i,13))
+        return POSITIONS
+
 #POSITIONS
     def drawBG(self):
         POSITIONS_BG = []
@@ -45,6 +55,7 @@ class Road:
         POSITIONS_BG += self.drawtop()
         POSITIONS_BG += self.rab.drawBL() + self.rab.drawBR() + self.rab.drawTL() + self.rab.drawTR()
         return POSITIONS_BG
+
 
     def drawRoad(self):
         POSITIONS = []
