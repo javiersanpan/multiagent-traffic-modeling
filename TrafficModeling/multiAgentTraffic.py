@@ -38,10 +38,9 @@ class MultiAgentTraffic(ap.Model):
 
         # Road direction attribute
         # Each element is a road for a different car agent
-        road_agents[0].road_direction = 0
-        road_agents[1].road_direction = 1
-        road_agents[2].road_direction = 2
-        background_road_agent.road_direction = 3
+        background_road_agent.road_direction = 0
+        for i in range(self.cars_amount):
+            road_agents[i].road_direction = i + 1
 
     def step(self):
         cars = self.cars
@@ -50,17 +49,17 @@ class MultiAgentTraffic(ap.Model):
             for neighbor in self.city.neighbors(car):
                 new_position = self.city.positions[neighbor]
                 
-                if neighbor.type_agent == 0 and neighbor.road_direction == 0 and car.type_agent == 2:
+                if neighbor.type_agent == 0 and neighbor.road_direction == 1 and car.type_agent == 2:
                     self.city.move_to(car, new_position)
                     neighbor.type_agent = 1
                     break
                     
-                if neighbor.type_agent == 0 and neighbor.road_direction == 1 and car.type_agent == 3:
+                if neighbor.type_agent == 0 and neighbor.road_direction == 2 and car.type_agent == 3:
                     self.city.move_to(car, new_position)
                     neighbor.type_agent = 1
                     break
 
-                if neighbor.type_agent == 0 and neighbor.road_direction == 2 and car.type_agent == 4:
+                if neighbor.type_agent == 0 and neighbor.road_direction == 3 and car.type_agent == 4:
                     self.city.move_to(car, new_position)
                     neighbor.type_agent = 1
                     break
