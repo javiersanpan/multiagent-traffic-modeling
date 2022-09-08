@@ -37,17 +37,20 @@ class MultiAgentTraffic(ap.Model):
         #3: car 1
         road_agents[0].type_agent = 0
         road_agents[1].type_agent = 0
+        road_agents[2].type_agent = 0
         background_road_agent.type_agent = 0
         
         self.cars[0].type_agent = 2
         self.cars[1].type_agent = 3
+        self.cars[2].type_agent = 4
 
         # Road direction attribute
         #0: is vertical
         #1: is horizontal
         road_agents[0].road_direction = 0
         road_agents[1].road_direction = 1
-        background_road_agent.road_direction = 2
+        road_agents[2].road_direction = 2
+        background_road_agent.road_direction = 3
 
     def step(self):
         cars = self.cars
@@ -56,12 +59,17 @@ class MultiAgentTraffic(ap.Model):
             for neighbor in self.city.neighbors(car):
                 new_position = self.city.positions[neighbor]
                 
-                if neighbor.type_agent == 0 and neighbor.road_direction == 0 and car.type_agent == 3:
+                if neighbor.type_agent == 0 and neighbor.road_direction == 0 and car.type_agent == 2:
                     self.city.move_to(car, new_position)
                     neighbor.type_agent = 1
                     break
                     
-                if neighbor.type_agent == 0 and neighbor.road_direction == 1 and car.type_agent == 2:
+                if neighbor.type_agent == 0 and neighbor.road_direction == 1 and car.type_agent == 3:
+                    self.city.move_to(car, new_position)
+                    neighbor.type_agent = 1
+                    break
+
+                if neighbor.type_agent == 0 and neighbor.road_direction == 2 and car.type_agent == 4:
                     self.city.move_to(car, new_position)
                     neighbor.type_agent = 1
                     break
