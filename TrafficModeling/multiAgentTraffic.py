@@ -9,6 +9,7 @@ class MultiAgentTraffic(ap.Model):
         self.roads_positions = self.p.roads_positions
         self.road_background = self.p.road_background
         self.cars_amount = self.p.cars_amount
+        self.begin_points = self.p.begin_points
 
         # Create grid
         self.city = ap.Grid(self, [self.p.size] * 2, track_empty=True)
@@ -17,7 +18,7 @@ class MultiAgentTraffic(ap.Model):
         self.cars=ap.AgentList(self,self.cars_amount)
 
         # Add car agents
-        self.city.add_agents(self.cars, [(26,13),(13,26)])
+        self.city.add_agents(self.cars, [self.begin_points[0],self.begin_points[1]])
 
         # Create and add road agents
         road_agents = []

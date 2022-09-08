@@ -28,7 +28,8 @@ parameters = {
     'steps':50,
     'roads_positions':roads_positions,
     'road_background':road_background,
-    'cars_amount':cars_amount
+    'cars_amount':cars_amount,
+    'begin_points':begin_points
     
 }
 
