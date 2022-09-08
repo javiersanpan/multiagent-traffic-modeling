@@ -3,40 +3,36 @@ import agentpy as ap
 # Custom made classes and functions
 from TrafficModeling.multiAgentTraffic import MultiAgentTraffic
 from TrafficModeling.roundabout import Roundabout
+from TrafficModeling.road import Road
 
 # Road agent positions
+ratio = 3
+x_center = 13
+y_center = 13
+cars_amount = 2
 
-POSITIONS_X = []
-POSITIONS_Y = []
-POSITIONS_BG = []
+begin_points = [(26,13), (13,26)]
+end_points = [(0,13), (26,13)]
 
-rab = Roundabout(3, 13, 13)
+roads_positions = []
 
-for i in range(0, 11):
-    POSITIONS_X.append((13,i))
-    POSITIONS_Y.append((i,13))
-    
-for i in range(16, 27):
-    POSITIONS_X.append((13,i))
-    POSITIONS_Y.append((i,13))
-
-#POSITIONS_X = POSITIONS_X + rab.drawTL() + rab.drawTR()
-#POSITIONS_X.append((10,13))
-
-#POSITIONS_Y = POSITIONS_Y + rab.drawBR() + rab.drawTR()
-#POSITIONS_Y.append((13,16))
-
-POSITIONS_BG = rab.drawBL() + rab.drawBR()
-
+# Generate road coordinates for each car and background road coordinates
+for i in range(cars_amount):
+    road = Road(ratio, x_center, y_center, begin_points[i], end_points[i])
+    roads_positions.append(road.drawRoad())
+road_background = road.drawBG()
 
 # Define parameters
 parameters = { 
     'size':27, 
     'steps':50,
-    'POSITIONS_X':POSITIONS_X,
-    'POSITIONS_Y':POSITIONS_Y,
-    'POSITIONS_BG':POSITIONS_BG
+    'roads_positions':roads_positions,
+    'road_background':road_background,
+    'cars_amount':cars_amount,
+    'begin_points':begin_points
+    
 }
+
 # Create single-run animation with custom colors
 def animation_plot(model, ax):
     attr_grid=model.city.attr_grid('type_agent')
