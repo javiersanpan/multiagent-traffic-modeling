@@ -46,4 +46,4 @@ fig, ax = plt. subplots()
 model = MultiAgentTraffic(parameters)
 
 animation = ap.animate(model, fig, ax, animation_plot)
-animation.save("./output/classesanimation.gif")
+animation.save("./output/modelanimation.gif")
