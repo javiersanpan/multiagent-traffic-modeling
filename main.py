@@ -8,14 +8,12 @@ from TrafficModeling.road import Road
 size = 27
 
 # Road agent positions
-ratio = 7
+ratio = 5
 vertical_center = 13
 horizontal_center = 13
 
-#begin_points = [(26,13), (13,26), (13,0)]
-#end_points = [(0,13), (26,13), (13,26)]
-begin_points = [(13,0)]
-end_points = [(26,13)]
+begin_points = [(26,13), (13,26), (13,0)]
+end_points = [(0,13), (26,13), (13,26)]
 cars_amount = len(begin_points)
 
 # Should background road be drawn
