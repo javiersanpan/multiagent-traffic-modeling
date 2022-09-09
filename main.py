@@ -1,3 +1,4 @@
+from turtle import begin_fill
 import matplotlib.pyplot as plt
 import agentpy as ap
 # Custom made classes and functions
