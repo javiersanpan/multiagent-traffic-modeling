@@ -15,8 +15,14 @@ horizontal_center = 13
 
 #begin_points = [(26,14), (14,26), (13,0)]
 #end_points = [(0,14), (26,14), (13,26)]
+
+
 begin_points = [(26,14), (12,26), (14, 1)]
 end_points = [(0,14), (26,12), (14, 26)]
+#begin_points = [(14, 1)]
+#end_points = [(14, 26)]
+
+
 #begin_points = [(26, 13)]
 #begin_points = [(0, 13)]
 #begin_points = [(26, horizontal_center + 1)]
