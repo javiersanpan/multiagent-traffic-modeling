@@ -1,7 +1,4 @@
 import agentpy as ap
-# Custom made classes and functions
-from TrafficModeling.roundabout import Roundabout
-from TrafficModeling.road import Road
 
 class MultiAgentTraffic(ap.Model):
     def setup(self):
@@ -16,9 +13,8 @@ class MultiAgentTraffic(ap.Model):
 
         # Create car agents
         self.cars=ap.AgentList(self,self.cars_amount)
-
         # Add car agents
-        self.city.add_agents(self.cars, [self.begin_points[0],self.begin_points[1]])
+        self.city.add_agents(self.cars, self.begin_points)
 
         # Create and add road agents
         road_agents = []
@@ -33,21 +29,18 @@ class MultiAgentTraffic(ap.Model):
         
         #0: untravelled road
         #1: travelled road
-        #2: car 0
-        #3: car 1
-        road_agents[0].type_agent = 0
-        road_agents[1].type_agent = 0
-        background_road_agent.type_agent = 0
+        #n >= 2: car n-2
+        for i in range(self.cars_amount):
+            road_agents[i].type_agent = 0
+            self.cars[i].type_agent = i + 2
         
-        self.cars[0].type_agent = 2
-        self.cars[1].type_agent = 3
+        background_road_agent.type_agent = 0
 
         # Road direction attribute
-        #0: is vertical
-        #1: is horizontal
-        road_agents[0].road_direction = 0
-        road_agents[1].road_direction = 1
-        background_road_agent.road_direction = 2
+        # Each element is a road for a different car agent
+        background_road_agent.road_direction = 0
+        for i in range(self.cars_amount):
+            road_agents[i].road_direction = i + 1
 
     def step(self):
         cars = self.cars
@@ -56,12 +49,17 @@ class MultiAgentTraffic(ap.Model):
             for neighbor in self.city.neighbors(car):
                 new_position = self.city.positions[neighbor]
                 
-                if neighbor.type_agent == 0 and neighbor.road_direction == 0 and car.type_agent == 3:
+                if neighbor.type_agent == 0 and neighbor.road_direction == 1 and car.type_agent == 2:
                     self.city.move_to(car, new_position)
                     neighbor.type_agent = 1
                     break
                     
-                if neighbor.type_agent == 0 and neighbor.road_direction == 1 and car.type_agent == 2:
+                if neighbor.type_agent == 0 and neighbor.road_direction == 2 and car.type_agent == 3:
+                    self.city.move_to(car, new_position)
+                    neighbor.type_agent = 1
+                    break
+
+                if neighbor.type_agent == 0 and neighbor.road_direction == 3 and car.type_agent == 4:
                     self.city.move_to(car, new_position)
                     neighbor.type_agent = 1
                     break

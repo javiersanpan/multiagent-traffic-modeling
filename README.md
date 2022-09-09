@@ -17,7 +17,7 @@ Features
 
 ### Animation of successful model:
 
-![animation-output](./output/classesanimation.gif)
+![animation-output](./output/modelanimation.gif)
 
 ## Requirements
 
