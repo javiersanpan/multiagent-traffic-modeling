@@ -29,3 +29,31 @@ conda install --file requirementsCONDA.txt
 
 pip install -r requirementsPIP.txt
 ```
+
+## Parameters
+
+You can change the parameters in main to generate a new model. These are the variables and their supported ranges:
+
+**Canvas size**
+
+size = 27
+
+**Roundabout ratio**
+
+ratio >= 3 and ratio <= 12
+
+**Roundabout center**
+
+vertical_center >= ratio + 1
+vertical_center <= size - ratio - 2
+
+horizontal_center >= ratio + 1
+horizontal_center <= size - ratio - 2
+
+**Draw background road so roundabout looks complete regardless of if a car traverses it** 
+
+draw_background : boolean
+
+**Begin and end points**
+
+*Do not change at the moment, WIP*
