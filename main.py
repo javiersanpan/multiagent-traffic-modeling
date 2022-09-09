@@ -8,7 +8,7 @@ from TrafficModeling.road import Road
 size = 27
 
 # Road agent positions
-ratio = 7
+ratio = 5
 vertical_center = 13
 horizontal_center = 13
 

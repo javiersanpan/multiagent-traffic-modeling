@@ -41,12 +41,12 @@ class Road:
             POSITIONS_DL.append((self.vertical_center ,i))
         return POSITIONS_DL
 
-    def draw_missing_points(self):
+    def draw_missing_points(self, all=False):
         MISSING_P = []
-        if self.draw_north_p: MISSING_P.append((self.vertical_center - self.ratio , self.horizontal_center))
-        if self.draw_south_p: MISSING_P.append((self.vertical_center + self.ratio , self.horizontal_center))
-        if self.draw_east_p: MISSING_P.append((self.vertical_center , self.horizontal_center + self.ratio))
-        if self.draw_west_p: MISSING_P.append((self.vertical_center , self.horizontal_center - self.ratio))
+        if self.draw_north_p or all: MISSING_P.append((self.vertical_center - self.ratio , self.horizontal_center))
+        if self.draw_south_p or all: MISSING_P.append((self.vertical_center + self.ratio , self.horizontal_center))
+        if self.draw_east_p or all: MISSING_P.append((self.vertical_center , self.horizontal_center + self.ratio))
+        if self.draw_west_p or all: MISSING_P.append((self.vertical_center , self.horizontal_center - self.ratio))
         return MISSING_P
 
 #POSITIONS
@@ -58,11 +58,11 @@ class Road:
         POSITIONS_BG += self.draw_east()
         POSITIONS_BG += self.draw_north()
         POSITIONS_BG += self.rab.drawBL() + self.rab.drawBR() + self.rab.drawTL() + self.rab.drawTR()
+        POSITIONS_BG += self.draw_missing_points(all=True)
         return POSITIONS_BG
 
     def drawRoad(self):
         POSITIONS = []
-
         # If entry is south
         if self.begin_p[0] == 26 and self.begin_p[1] == 13:
             POSITIONS+=self.draw_south()
