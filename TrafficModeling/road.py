@@ -16,10 +16,19 @@ class Road:
         self.draw_east_p = False
         self.draw_west_p = False
         
-    def draw_south(self):
+    def draw_south(self, intersection_position="center"):
+        # Possible intersection positions
+        # center, entry, exit
+        if intersection_position == "center":
+            intersection = self.horizontal_center
+        elif intersection_position == "entry":
+            intersection = self.horizontal_center + 1
+        elif intersection_position == "exit":
+            intersection = self.horizontal_center - 1
+        
         POSITIONS_DB = []
         for i in range(self.vertical_center + self.ratio + 1, self.size):
-            POSITIONS_DB.append((i, self.horizontal_center))
+            POSITIONS_DB.append((i, intersection))
         return POSITIONS_DB
 
     def draw_north(self):
@@ -40,12 +49,12 @@ class Road:
             POSITIONS_DL.append((self.vertical_center ,i))
         return POSITIONS_DL
 
-    def draw_missing_points(self):
+    def draw_missing_points(self, all=False):
         MISSING_P = []
-        if self.draw_north_p: MISSING_P.append((self.vertical_center - self.ratio , self.horizontal_center))
-        if self.draw_south_p: MISSING_P.append((self.vertical_center + self.ratio , self.horizontal_center))
-        if self.draw_east_p: MISSING_P.append((self.vertical_center , self.horizontal_center + self.ratio))
-        if self.draw_west_p: MISSING_P.append((self.vertical_center , self.horizontal_center - self.ratio))
+        if self.draw_north_p or all: MISSING_P.append((self.vertical_center - self.ratio , self.horizontal_center))
+        if self.draw_south_p or all: MISSING_P.append((self.vertical_center + self.ratio , self.horizontal_center))
+        if self.draw_east_p or all: MISSING_P.append((self.vertical_center , self.horizontal_center + self.ratio))
+        if self.draw_west_p or all: MISSING_P.append((self.vertical_center , self.horizontal_center - self.ratio))
         return MISSING_P
 
 #POSITIONS
@@ -57,14 +66,14 @@ class Road:
         POSITIONS_BG += self.draw_east()
         POSITIONS_BG += self.draw_north()
         POSITIONS_BG += self.rab.drawBL() + self.rab.drawBR() + self.rab.drawTL() + self.rab.drawTR()
+        POSITIONS_BG += self.draw_missing_points(all=True)
         return POSITIONS_BG
 
     def drawRoad(self):
         POSITIONS = []
-
         # If entry is south
-        if self.begin_p[0] == 25 and self.begin_p[1] == 13:
-            POSITIONS+=self.draw_south()
+        if self.begin_p[0] == self.size - 1 and self.begin_p[1] == self.horizontal_center:
+            POSITIONS+=self.draw_south("entry")
             POSITIONS+=self.rab.drawBR()
             self.draw_south_p = True
 

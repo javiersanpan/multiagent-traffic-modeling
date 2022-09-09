@@ -13,8 +13,10 @@ ratio = 5
 vertical_center = 13
 horizontal_center = 13
 
-begin_points = [(25,13), (13,25), (13,1)]
-end_points = [(0,13), (26,13), (13,26)]
+#begin_points = [(26,13), (13,26), (13,0)]
+#end_points = [(0,13), (26,13), (13,26)]
+begin_points = [(26,13)]
+end_points = [(0,13)]
 cars_amount = len(begin_points)
 
 # Should background road be drawn
