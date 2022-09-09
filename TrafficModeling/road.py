@@ -68,41 +68,32 @@ class Road:
             POSITIONS+=self.draw_south()
             POSITIONS+=self.rab.drawBR()
             self.draw_south_p = True
-            #POSITIONS.append((13,16))
 
             if self.end_p[0] == 13 and self.end_p[1] == 26:
                 # If exit is east
                 POSITIONS+=self.draw_east()
-                self.draw_east_p = True
 
             elif self.end_p[0] == 0 and self.end_p[1] == 13:
                 # If exit is north
                 POSITIONS+=self.draw_north()
                 POSITIONS += self.rab.drawTR()
-                self.draw_north_p = True
                 self.draw_east_p = True
-                #POSITIONS.append((10,13))
             
             elif self.end_p[0] == 13 and self.end_p[1] == 0:
                 # If exit is west
                 POSITIONS+=self.draw_west()
                 POSITIONS += self.rab.drawTR() + self.rab.drawTL()
-                self.draw_west_p = True
                 self.draw_north_p = True
                 self.draw_east_p = True
-                #POSITIONS.append((10,13))
-                #POSITIONS.append((13,10))
             
         # If entry is east
         elif self.begin_p[0] == 13 and self.begin_p[1] == 25:
             POSITIONS+=self.draw_east()
             POSITIONS+=self.rab.drawTR()
             self.draw_east_p = True
-            #POSITIONS.append((10,13))
 
             if self.end_p[0] == 0 and self.end_p[1] == 13:
                 # If exit is north
-                self.draw_north_p = True
                 POSITIONS+=self.draw_north()
 
             elif self.end_p[0] == 13 and self.end_p[1] == 0:
@@ -110,9 +101,6 @@ class Road:
                 POSITIONS+=self.draw_west()
                 POSITIONS+=self.rab.drawTL()
                 self.draw_north_p = True
-                self.draw_west_p = True
-
-                #POSITIONS.append((13,10))
 
             elif self.end_p[0] == 26 and self.end_p[1] == 13:
                 # If exit is south
@@ -120,18 +108,12 @@ class Road:
                 POSITIONS+=self.rab.drawTL() + self.rab.drawBL()
                 self.draw_north_p = True
                 self.draw_west_p = True
-                self.draw_south_p = True
-                #POSITIONS.append((13,10))
-                #POSITIONS.append((16,13))
 
         # If entry is north
         elif self.begin_p[0] == 1 and self.begin_p[1] == 13:
             POSITIONS+=self.draw_north()
             POSITIONS+=self.rab.drawTL()
-            self.draw_west_p = True
-            #POSITIONS.append((13,10))
             self.draw_north_p = True
-
 
             if self.end_p[0] == 13 and self.end_p[1] == 0:
                 # If exit is west
@@ -141,25 +123,20 @@ class Road:
                 # If exit is south
                 POSITIONS+=self.draw_south()
                 POSITIONS+=self.rab.drawBL()
-                self.draw_south_p = True
-                #POSITIONS.append((16,13))
+                self.draw_west_p = True
 
             elif self.end_p[0] == 13 and self.end_p[1] == 26:
                 # If exit is east
                 POSITIONS+=self.draw_east()
                 POSITIONS+=self.rab.drawBL() + self.rab.drawBR()
                 self.draw_south_p = True
-                self.draw_east_p = True
-                #POSITIONS.append((16,13))
-                #POSITIONS.append((13,16))
+                self.draw_west_p = True
         
         # If entry is west
         elif self.begin_p[0] == 13 and self.begin_p[1] == 1:
             POSITIONS+=self.draw_west()
             POSITIONS+=self.rab.drawBL()
             self.draw_west_p = True
-            self.draw_south_p = True
-            #POSITIONS.append((16,13))
 
             if self.end_p[0] == 26 and self.end_p[1] == 13:
                 # If exit is south
@@ -169,18 +146,14 @@ class Road:
                 # If exit is east
                 POSITIONS+=self.draw_east()
                 POSITIONS+=self.rab.drawBR()
-                #POSITIONS.append((13,16))
-                #self.draw_east_p = True
-
+                self.draw_south_p = True
 
             elif self.end_p[0] == 0 and self.end_p[1] == 13:
                 # If exit is north
                 POSITIONS+=self.draw_north()
                 POSITIONS+=self.rab.drawBR()+self.rab.drawTR()
                 self.draw_east_p = True
-                self.draw_north_p = True
-                #POSITIONS.append((13,16))
-                #POSITIONS.append((0,13))
+                self.draw_south_p = True
 
         POSITIONS+=self.draw_missing_points()
 
