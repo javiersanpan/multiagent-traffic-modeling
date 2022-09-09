@@ -64,7 +64,7 @@ class Road:
         POSITIONS = []
 
         # If entry is south
-        if self.begin_p[0] == 26 and self.begin_p[1] == 13:
+        if self.begin_p[0] == 25 and self.begin_p[1] == 13:
             POSITIONS+=self.draw_south()
             POSITIONS+=self.rab.drawBR()
             self.draw_south_p = True
@@ -94,7 +94,7 @@ class Road:
                 #POSITIONS.append((13,10))
             
         # If entry is east
-        elif self.begin_p[0] == 13 and self.begin_p[1] == 26:
+        elif self.begin_p[0] == 13 and self.begin_p[1] == 25:
             POSITIONS+=self.draw_east()
             POSITIONS+=self.rab.drawTR()
             self.draw_east_p = True
