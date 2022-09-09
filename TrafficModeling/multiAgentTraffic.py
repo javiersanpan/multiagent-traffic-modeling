@@ -2,6 +2,9 @@ import agentpy as ap
 
 class MultiAgentTraffic(ap.Model):
     def setup(self):
+        self.car0cords = []
+        self.car1cords = []
+        self.car2cords = []
         # Read custom parameters
         self.roads_positions = self.p.roads_positions
         self.road_background = self.p.road_background
@@ -52,14 +55,29 @@ class MultiAgentTraffic(ap.Model):
                 if neighbor.type_agent == 0 and neighbor.road_direction == 1 and car.type_agent == 2:
                     self.city.move_to(car, new_position)
                     neighbor.type_agent = 1
+
+                    arrElem = str(new_position)[1:-1]
+                    self.car0cords.append(arrElem)
                     break
                     
                 if neighbor.type_agent == 0 and neighbor.road_direction == 2 and car.type_agent == 3:
                     self.city.move_to(car, new_position)
                     neighbor.type_agent = 1
+
+                    arrElem = str(new_position)[1:-1]
+                    self.car1cords.append(arrElem)
                     break
 
                 if neighbor.type_agent == 0 and neighbor.road_direction == 3 and car.type_agent == 4:
                     self.city.move_to(car, new_position)
                     neighbor.type_agent = 1
+
+                    arrElem = str(new_position)[1:-1]
+                    self.car2cords.append(arrElem)
                     break
+
+        jsonFile = open("output/coordinates.json", "w")
+        jsonContent = {"car0":self.car0cords,"car1":self.car1cords,"car2":self.car2cords} 
+        jsonContent = str(jsonContent).replace("\'","\"")
+        jsonFile.write(str(jsonContent))
+        jsonFile.close()
