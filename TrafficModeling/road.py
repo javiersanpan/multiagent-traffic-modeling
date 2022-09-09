@@ -48,9 +48,9 @@ class Road:
         if intersection_position == "center":
             intersection = self.vertical_center
         elif intersection_position == "entry":
-            intersection = self.vertical_center + 1
-        elif intersection_position == "exit":
             intersection = self.vertical_center - 1
+        elif intersection_position == "exit":
+            intersection = self.vertical_center + 1
 
         POSITIONS_DR = []
         for i in range(self.horizontal_center + self.ratio + 1, self.size):
@@ -61,9 +61,9 @@ class Road:
         if intersection_position == "center":
             intersection = self.vertical_center
         elif intersection_position == "entry":
-            intersection = self.vertical_center - 1
-        elif intersection_position == "exit":
             intersection = self.vertical_center + 1
+        elif intersection_position == "exit":
+            intersection = self.vertical_center - 1
 
         POSITIONS_DL = []
         for i in range(1, self.horizontal_center - self.ratio):
@@ -93,92 +93,91 @@ class Road:
     def drawRoad(self):
         POSITIONS = []
         # If entry is south
-        if self.begin_p[0] == self.size - 1 and self.begin_p[1] == self.horizontal_center:
+        if self.begin_p[0] == self.size - 1 and self.begin_p[1] == self.horizontal_center + 1:
             POSITIONS+=self.draw_south("entry")
             POSITIONS+=self.rab.drawBR()
-
+            
+            # If exit is east
             if self.end_p[0] == 13 and self.end_p[1] == 26:
-                # If exit is east
                 POSITIONS+=self.draw_east()
 
-            elif self.end_p[0] == 0 and self.end_p[1] == 13:
-                # If exit is north
+            # If exit is north
+            elif self.end_p[0] == 0 and self.end_p[1] == self.horizontal_center + 1:
                 POSITIONS += self.draw_north("exit")
                 POSITIONS += self.rab.drawTR()
                 self.draw_east_p = True
                 POSITIONS.remove((self.vertical_center - self.ratio, self.horizontal_center + 1))
-            
+
+             # If exit is west
             elif self.end_p[0] == 13 and self.end_p[1] == 0:
-                # If exit is west
                 POSITIONS += self.draw_west()
                 POSITIONS += self.rab.drawTR() + self.rab.drawTL()
                 self.draw_north_p = True
                 self.draw_east_p = True
             
         # If entry is east
-        elif self.begin_p[0] == 13 and self.begin_p[1] == 25:
-            POSITIONS+=self.draw_east()
+        elif self.begin_p[0] == self.vertical_center - 1 and self.begin_p[1] == self.size - 1:
+            POSITIONS+=self.draw_east("entry")
             POSITIONS+=self.rab.drawTR()
             self.draw_east_p = True
 
-            if self.end_p[0] == 0 and self.end_p[1] == 13:
-                # If exit is north
+            # If exit is north
+            if self.end_p[0] == 0 and self.end_p[1] == 13: 
                 POSITIONS+=self.draw_north()
 
+            # If exit is west
             elif self.end_p[0] == 13 and self.end_p[1] == 0:
-                # If exit is west
                 POSITIONS+=self.draw_west()
                 POSITIONS+=self.rab.drawTL()
                 self.draw_north_p = True
 
+            # If exit is south
             elif self.end_p[0] == 26 and self.end_p[1] == 13:
-                # If exit is south
                 POSITIONS+=self.draw_south()
                 POSITIONS+=self.rab.drawTL() + self.rab.drawBL()
                 self.draw_north_p = True
                 self.draw_west_p = True
 
         # If entry is north
-        elif self.begin_p[0] == 1 and self.begin_p[1] == 13:
+        elif self.begin_p[0] == 1 and self.begin_p[1] == self.horizontal_center - 1:
             POSITIONS+=self.draw_north()
             POSITIONS+=self.rab.drawTL()
             self.draw_north_p = True
 
+            # If exit is west
             if self.end_p[0] == 13 and self.end_p[1] == 0:
-                # If exit is west
                 POSITIONS+=self.draw_west()
             
+            # If exit is south
             elif self.end_p[0] == 26 and self.end_p[1] == 13:
-                # If exit is south
                 POSITIONS+=self.draw_south()
                 POSITIONS+=self.rab.drawBL()
                 self.draw_west_p = True
 
+            # If exit is east
             elif self.end_p[0] == 13 and self.end_p[1] == 26:
-                # If exit is east
                 POSITIONS+=self.draw_east()
                 POSITIONS+=self.rab.drawBL() + self.rab.drawBR()
                 self.draw_south_p = True
                 self.draw_west_p = True
         
         # If entry is west
-        elif self.begin_p[0] == 13 and self.begin_p[1] == 1:
-            POSITIONS+=self.draw_west()
+        elif self.begin_p[0] == self.vertical_center + 1 and self.begin_p[1] == 1:
+            POSITIONS+=self.draw_west("entry")
             POSITIONS+=self.rab.drawBL()
-            self.draw_west_p = True
 
+            # If exit is south
             if self.end_p[0] == 26 and self.end_p[1] == 13:
-                # If exit is south
                 POSITIONS+=self.draw_south()
 
+            # If exit is east
             elif self.end_p[0] == 13 and self.end_p[1] == 26:
-                # If exit is east
                 POSITIONS+=self.draw_east()
                 POSITIONS+=self.rab.drawBR()
                 self.draw_south_p = True
 
+            # If exit is north
             elif self.end_p[0] == 0 and self.end_p[1] == 13:
-                # If exit is north
                 POSITIONS+=self.draw_north()
                 POSITIONS+=self.rab.drawBR()+self.rab.drawTR()
                 self.draw_east_p = True
