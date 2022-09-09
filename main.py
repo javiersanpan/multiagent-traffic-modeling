@@ -1,3 +1,4 @@
+from turtle import begin_fill
 import matplotlib.pyplot as plt
 import agentpy as ap
 # Custom made classes and functions
@@ -12,8 +13,10 @@ ratio = 5
 vertical_center = 13
 horizontal_center = 13
 
-begin_points = [(25,13), (13,25), (13,1)]
-end_points = [(0,13), (26,13), (13,26)]
+#begin_points = [(25,13), (13,25), (13,1)]
+#end_points = [(0,13), (26,13), (13,26)]
+begin_points = [(13,25)]
+end_points = [(26,13)]
 cars_amount = len(begin_points)
 
 # Should background road be drawn
