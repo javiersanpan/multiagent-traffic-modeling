@@ -1,4 +1,3 @@
-import json
 import agentpy as ap
 
 class MultiAgentTraffic(ap.Model):
