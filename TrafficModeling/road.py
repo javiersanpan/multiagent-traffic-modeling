@@ -170,7 +170,7 @@ class Road:
                 POSITIONS+=self.draw_east()
                 POSITIONS+=self.rab.drawBR()
                 #POSITIONS.append((13,16))
-                self.draw_east_p = True
+                #self.draw_east_p = True
 
 
             elif self.end_p[0] == 0 and self.end_p[1] == 13:
