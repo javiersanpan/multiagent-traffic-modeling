@@ -9,10 +9,16 @@ class Road:
         self.end_p = end_p
         self.rab = Roundabout(ratio, vertical_center, horizontal_center)
         self.size = size
+
+        # Set which missing points should be added
+        draw_north_p = False
+        draw_south_p = False
+        draw_east_p = False
+        draw_west_p = False
         
     def draw_south(self):
         POSITIONS_DB = []
-        for i in range(self.vertical_center + self.ratio , self.size):
+        for i in range(self.vertical_center + self.ratio + 1, self.size):
             POSITIONS_DB.append((i, self.horizontal_center))
         return POSITIONS_DB
 
@@ -24,18 +30,23 @@ class Road:
 
     def draw_east(self):
         POSITIONS_DR = []
-        for i in range(self.vertical_center + self.ratio , self.size):
-            POSITIONS_DR.append((self.horizontal_center ,i))
+        for i in range(self.horizontal_center + self.ratio + 1, self.size):
+            POSITIONS_DR.append((self.vertical_center ,i))
         return POSITIONS_DR
 
     def draw_west(self):
         POSITIONS_DL = []
-        for i in range(0, self.vertical_center - self.ratio):
-            POSITIONS_DL.append((self.horizontal_center ,i))
+        for i in range(self.horizontal_center - self.ratio):
+            POSITIONS_DL.append((self.vertical_center ,i))
         return POSITIONS_DL
 
+    def draw_missing_points(self):
+        MISSING_P = []
+        if self.draw_east_p:
+            MISSING_P.append((13,16))
+
 #POSITIONS
-    def drawBG(self):
+    def draw_background(self):
         POSITIONS_BG = []
         # Draw background road
         POSITIONS_BG += self.draw_south()

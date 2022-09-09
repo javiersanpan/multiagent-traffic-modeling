@@ -8,21 +8,29 @@ from TrafficModeling.road import Road
 size = 27
 
 # Road agent positions
-ratio = 3
+ratio = 5
 vertical_center = 13
 horizontal_center = 13
 
-begin_points = [(26,13), (13,26), (13,0)]
-end_points = [(0,13), (26,13), (13,26)]
+#begin_points = [(26,13), (13,26), (13,0)]
+#end_points = [(0,13), (26,13), (13,26)]
+begin_points = [(13,0)]
+end_points = [(26,13)]
 cars_amount = len(begin_points)
 
-roads_positions = []
+# Should background road be drawn
+draw_background = False
 
 # Generate road coordinates for each car and background road coordinates
+roads_positions = []
 for i in range(cars_amount):
     road = Road(ratio, vertical_center, horizontal_center, begin_points[i], end_points[i], size)
     roads_positions.append(road.drawRoad())
-road_background = road.drawBG()
+
+if draw_background:
+    road_background = road.draw_background()
+else:
+    road_background = []
 
 # Define parameters
 parameters = { 
