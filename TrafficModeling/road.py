@@ -1,3 +1,4 @@
+from re import M
 from TrafficModeling.roundabout import Roundabout
 
 class Road:
@@ -11,10 +12,10 @@ class Road:
         self.size = size
 
         # Set which missing points should be added
-        draw_north_p = False
-        draw_south_p = False
-        draw_east_p = False
-        draw_west_p = False
+        self.draw_north_p = False
+        self.draw_south_p = True
+        self.draw_east_p = False
+        self.draw_west_p = True
         
     def draw_south(self):
         POSITIONS_DB = []
@@ -42,8 +43,11 @@ class Road:
 
     def draw_missing_points(self):
         MISSING_P = []
-        if self.draw_east_p:
-            MISSING_P.append((13,16))
+        if self.draw_north_p: MISSING_P.append((self.vertical_center - self.ratio , self.horizontal_center))
+        if self.draw_south_p: MISSING_P.append((self.vertical_center + self.ratio , self.horizontal_center))
+        if self.draw_east_p: MISSING_P.append((self.vertical_center , self.horizontal_center + self.ratio))
+        if self.draw_west_p: MISSING_P.append((self.vertical_center , self.horizontal_center - self.ratio))
+        return MISSING_P
 
 #POSITIONS
     def draw_background(self):
@@ -138,5 +142,8 @@ class Road:
                 POSITIONS+=self.rab.drawBR()+self.rab.drawTR()
                 #POSITIONS.append((13,16))
                 #POSITIONS.append((0,13))
-    
+
+        
+        POSITIONS+=self.draw_missing_points()
+
         return POSITIONS
