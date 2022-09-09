@@ -76,7 +76,7 @@ class MultiAgentTraffic(ap.Model):
                     self.car2cords.append(arrElem)
                     break
 
-        jsonFile = open("output/cords.json", "w")
+        jsonFile = open("output/coordinates.json", "w")
         jsonContent = {"car0":self.car0cords,"car1":self.car1cords,"car2":self.car2cords} 
         jsonContent = str(jsonContent).replace("\'","\"")
         jsonFile.write(str(jsonContent))
