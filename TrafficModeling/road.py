@@ -31,22 +31,43 @@ class Road:
             POSITIONS_DB.append((i, intersection))
         return POSITIONS_DB
 
-    def draw_north(self):
+    def draw_north(self, intersection_position="center"):
+        if intersection_position == "center":
+            intersection = self.horizontal_center
+        elif intersection_position == "entry":
+            intersection = self.horizontal_center - 1
+        elif intersection_position == "exit":
+            intersection = self.horizontal_center + 1
+
         POSITIONS_DT = []
-        for i in range(0, self.vertical_center - self.ratio + 1):
-            POSITIONS_DT.append((i, self.horizontal_center))
+        for i in range(0, self.vertical_center - self.ratio):
+            POSITIONS_DT.append((i, intersection))
         return POSITIONS_DT
 
-    def draw_east(self):
+    def draw_east(self, intersection_position="center"):
+        if intersection_position == "center":
+            intersection = self.vertical_center
+        elif intersection_position == "entry":
+            intersection = self.vertical_center + 1
+        elif intersection_position == "exit":
+            intersection = self.vertical_center - 1
+
         POSITIONS_DR = []
         for i in range(self.horizontal_center + self.ratio + 1, self.size):
-            POSITIONS_DR.append((self.vertical_center ,i))
+            POSITIONS_DR.append((intersection ,i))
         return POSITIONS_DR
 
-    def draw_west(self):
+    def draw_west(self, intersection_position="center"):
+        if intersection_position == "center":
+            intersection = self.vertical_center
+        elif intersection_position == "entry":
+            intersection = self.vertical_center - 1
+        elif intersection_position == "exit":
+            intersection = self.vertical_center + 1
+
         POSITIONS_DL = []
         for i in range(1, self.horizontal_center - self.ratio):
-            POSITIONS_DL.append((self.vertical_center ,i))
+            POSITIONS_DL.append((intersection ,i))
         return POSITIONS_DL
 
     def draw_missing_points(self, all=False):
@@ -75,7 +96,6 @@ class Road:
         if self.begin_p[0] == self.size - 1 and self.begin_p[1] == self.horizontal_center:
             POSITIONS+=self.draw_south("entry")
             POSITIONS+=self.rab.drawBR()
-            self.draw_south_p = True
 
             if self.end_p[0] == 13 and self.end_p[1] == 26:
                 # If exit is east
@@ -83,13 +103,14 @@ class Road:
 
             elif self.end_p[0] == 0 and self.end_p[1] == 13:
                 # If exit is north
-                POSITIONS+=self.draw_north()
+                POSITIONS += self.draw_north("exit")
                 POSITIONS += self.rab.drawTR()
                 self.draw_east_p = True
+                POSITIONS.remove((self.vertical_center - self.ratio, self.horizontal_center + 1))
             
             elif self.end_p[0] == 13 and self.end_p[1] == 0:
                 # If exit is west
-                POSITIONS+=self.draw_west()
+                POSITIONS += self.draw_west()
                 POSITIONS += self.rab.drawTR() + self.rab.drawTL()
                 self.draw_north_p = True
                 self.draw_east_p = True
