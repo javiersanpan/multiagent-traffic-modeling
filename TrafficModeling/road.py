@@ -1,4 +1,3 @@
-from re import M
 from TrafficModeling.roundabout import Roundabout
 
 class Road:
@@ -17,10 +16,19 @@ class Road:
         self.draw_east_p = False
         self.draw_west_p = False
         
-    def draw_south(self):
+    def draw_south(self, intersection_position="center"):
+        # Possible intersection positions
+        # center, entry, exit
+        if intersection_position == "center":
+            intersection = self.horizontal_center
+        elif intersection_position == "entry":
+            intersection = self.horizontal_center + 1
+        elif intersection_position == "exit":
+            intersection = self.horizontal_center - 1
+        
         POSITIONS_DB = []
         for i in range(self.vertical_center + self.ratio + 1, self.size):
-            POSITIONS_DB.append((i, self.horizontal_center))
+            POSITIONS_DB.append((i, intersection))
         return POSITIONS_DB
 
     def draw_north(self):
@@ -64,10 +72,9 @@ class Road:
     def drawRoad(self):
         POSITIONS = []
         # If entry is south
-        if self.begin_p[0] == 26 and self.begin_p[1] == 13:
-            POSITIONS+=self.draw_south()
+        if self.begin_p[0] == self.size - 1 and self.begin_p[1] == self.horizontal_center:
+            POSITIONS+=self.draw_south("entry")
             POSITIONS+=self.rab.drawBR()
-            self.draw_south_p = True
             #POSITIONS.append((13,16))
 
             if self.end_p[0] == 13 and self.end_p[1] == 26:
