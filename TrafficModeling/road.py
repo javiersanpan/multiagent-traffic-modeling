@@ -25,7 +25,7 @@ class Road:
 
     def draw_north(self):
         POSITIONS_DT = []
-        for i in range(0, self.vertical_center - self.ratio):
+        for i in range(0, self.vertical_center - self.ratio + 1):
             POSITIONS_DT.append((i, self.horizontal_center))
         return POSITIONS_DT
 
@@ -37,7 +37,7 @@ class Road:
 
     def draw_west(self):
         POSITIONS_DL = []
-        for i in range(self.horizontal_center - self.ratio):
+        for i in range(1, self.horizontal_center - self.ratio):
             POSITIONS_DL.append((self.vertical_center ,i))
         return POSITIONS_DL
 
@@ -125,7 +125,7 @@ class Road:
                 #POSITIONS.append((16,13))
 
         # If entry is north
-        elif self.begin_p[0] == 0 and self.begin_p[1] == 13:
+        elif self.begin_p[0] == 1 and self.begin_p[1] == 13:
             POSITIONS+=self.draw_north()
             POSITIONS+=self.rab.drawTL()
             self.draw_west_p = True
@@ -154,7 +154,7 @@ class Road:
                 #POSITIONS.append((13,16))
         
         # If entry is west
-        elif self.begin_p[0] == 13 and self.begin_p[1] == 0:
+        elif self.begin_p[0] == 13 and self.begin_p[1] == 1:
             POSITIONS+=self.draw_west()
             POSITIONS+=self.rab.drawBL()
             self.draw_west_p = True
